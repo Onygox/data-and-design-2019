@@ -25,7 +25,7 @@ from sklearn.preprocessing import PowerTransformer
 import pickle
 
 with open('article_classifier.pkl', 'rb') as picklefile:
-    classifier = pickle.load(picklefile)
+    c = pickle.load(picklefile)
 
 with open('score_predictor.pkl', 'rb') as picklefile:
     predictor = pickle.load(picklefile)
@@ -41,17 +41,17 @@ def result():
 
         name = inputs['name']
         article = inputs['article']
+        sentiment = TextBlob(article, classifier = c).sentiment
 
-        # item = np.array([name, article]).reshape(-1,2)
-        classification = classifier.classify(article)
-        prediction = predictor.predict([[classification.sentiment.polarity, classification.sentiment.subjectivity]]))
+        classification = c.classify(article)
+        prediction = predictor.predict([sentiment])
 
         if (classification == 'neg'):
             result = 'negative'
         else:
             result = 'positive'
 
-        return render_template('blog.html', n=name, r=result)
+        return render_template('blog.html', n=name, r=result, p=prediction)
 
 #put site content here
 
