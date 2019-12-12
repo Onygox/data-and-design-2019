@@ -1,10 +1,8 @@
+import flask
 from flask import Flask, render_template
 from flask_frozen import Freezer
 
-import flask
-from flask import render_template
-
-app = flask.Flask(__name__)
+# app = Flask(__name__)
 
 app = Flask('__name__')
 freezer = Freezer(app)
@@ -32,7 +30,7 @@ with open('score_predictor.pkl', 'rb') as picklefile:
 
 #-------- ROUTES GO HERE -----------#
 
-@app.route('/classify', methods=['POST', 'GET'])
+@app.route("/classify", methods=['POST', 'GET'])
 def result():
     '''Gets prediction using the HTML form'''
     if flask.request.method == 'POST':
@@ -76,9 +74,9 @@ def blog():
 
 if __name__ == "__main__":
     # freezer.freeze()
-    # app.run(debug=True)
+    app.run(debug=True)
     '''Connects to the server'''
 
-    HOST = '127.0.0.1'
-    PORT = 4000
-    app.run(HOST, PORT, debug=True)
+    # HOST = '127.0.0.1'
+    # PORT = 4000
+    # app.run(HOST, PORT, debug=True)
