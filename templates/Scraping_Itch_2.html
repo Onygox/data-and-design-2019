@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-
-{%extends 'base.html'%}
-
-{%block content%}
-
 <html>
 <head><meta charset="utf-8" />
 
@@ -13118,9 +13113,16 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Intro-To-Webscraping">Intro To Webscraping<a class="anchor-link" href="#Intro-To-Webscraping">&#182;</a></h1><h3 id="The-goal-of-this-project-is-to-scrape-a-website-and-make-an-organized-DataFrame-from-its-contents.">The goal of this project is to scrape a website and make an organized DataFrame from its contents.<a class="anchor-link" href="#The-goal-of-this-project-is-to-scrape-a-website-and-make-an-organized-DataFrame-from-its-contents.">&#182;</a></h3>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
@@ -13135,10 +13137,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">=</span>  <span class="s2">&quot;https://itch.io/games&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://itch.io/games&quot;</span>
 </pre></div>
 
     </div>
@@ -13148,7 +13150,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">itchrequest</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
@@ -13161,7 +13163,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">itchrequest</span>
@@ -13177,7 +13179,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[12]:</div>
+    <div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -13194,7 +13196,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">itchsoup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">itchrequest</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
@@ -13207,12 +13209,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">game_cells_data</span> <span class="o">=</span> <span class="n">itchsoup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;game_cell_data&#39;</span><span class="p">})</span>
 <span class="n">game_genres</span> <span class="o">=</span> <span class="n">itchsoup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;game_genre&#39;</span><span class="p">})</span>
-<span class="n">game_cells_data</span>
 </pre></div>
 
     </div>
@@ -13222,28 +13223,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># game_ids = []</span>
-<span class="c1"># for i in range(len(game_cells)):</span>
-<span class="c1">#     #print(game_cells[i][&#39;data-game_id&#39;])</span>
-<span class="c1">#     game_ids.append(game_cells[i][&#39;data-game_id&#39;])</span>
-<span class="c1"># game_ids</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">game_cell_data</span> <span class="o">=</span> <span class="n">itchsoup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;game_cell_data&#39;</span><span class="p">})</span>
-<span class="c1">#game_cell_data.find(&#39;div&#39;, {&#39;class&#39;:&#39;game_genre&#39;})</span>
 </pre></div>
 
     </div>
@@ -13253,7 +13236,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">game_genres</span> <span class="o">=</span> <span class="p">[]</span>
@@ -13272,7 +13255,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">game_genres</span>
@@ -13288,42 +13271,42 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[36]:</div>
+    <div class="prompt output_prompt">Out[10]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;Survival&#39;,
- &#39;Survival&#39;,
- &#39;Survival&#39;,
- &#39;Racing&#39;,
+<pre>[&#39;N/A&#39;,
  &#39;Adventure&#39;,
- &#39;Strategy&#39;,
- &#39;N/A&#39;,
- &#39;Strategy&#39;,
  &#39;N/A&#39;,
  &#39;Adventure&#39;,
- &#39;Visual Novel&#39;,
- &#39;N/A&#39;,
  &#39;Survival&#39;,
- &#39;Simulation&#39;,
- &#39;Simulation&#39;,
- &#39;Platformer&#39;,
- &#39;Visual Novel&#39;,
- &#39;Puzzle&#39;,
  &#39;N/A&#39;,
- &#39;Action&#39;,
- &#39;N/A&#39;,
- &#39;Adventure&#39;,
  &#39;Adventure&#39;,
  &#39;Platformer&#39;,
+ &#39;Survival&#39;,
+ &#39;Adventure&#39;,
+ &#39;Shooter&#39;,
  &#39;N/A&#39;,
+ &#39;Adventure&#39;,
+ &#39;Platformer&#39;,
  &#39;Visual Novel&#39;,
- &#39;Role Playing&#39;,
- &#39;Action&#39;,
+ &#39;Adventure&#39;,
+ &#39;Interactive Fiction&#39;,
  &#39;N/A&#39;,
- &#39;N/A&#39;]</pre>
+ &#39;Adventure&#39;,
+ &#39;Adventure&#39;,
+ &#39;Adventure&#39;,
+ &#39;Shooter&#39;,
+ &#39;Adventure&#39;,
+ &#39;Survival&#39;,
+ &#39;Action&#39;,
+ &#39;Action&#39;,
+ &#39;Strategy&#39;,
+ &#39;Visual Novel&#39;,
+ &#39;Visual Novel&#39;,
+ &#39;Visual Novel&#39;]</pre>
 </div>
 
 </div>
@@ -13342,7 +13325,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">game_cells_data</span><span class="p">)</span>
@@ -13358,7 +13341,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[19]:</div>
+    <div class="prompt output_prompt">Out[11]:</div>
 
 
 
@@ -13375,7 +13358,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">game_taglines</span> <span class="o">=</span> <span class="p">[]</span>
@@ -13398,42 +13381,42 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[20]:</div>
+    <div class="prompt output_prompt">Out[12]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;A psychological horror game&#39;,
- &#39;Every kid has that one toy that scares them. Imagine if it came to life.&#39;,
- &#39;A short indie horror game!&#39;,
- &#39;Raccoons riding longboards on this retro themed relaxing arcade game&#39;,
- &#39;Escape a haunted hospital using otherworldly powers&#39;,
- &#39;City Builder meets Top-Down Shooter, settled in wild west era.&#39;,
- &#39;A free short horror game&#39;,
- &#39;A sandbox tower defense game&#39;,
- &#39;A short horror comedy prologue for Dementophobia&#39;,
- &#39;Something sinister happens in Saint Bernard.&#39;,
- &#39;Gay furry visual novel with a supernatural twist&#39;,
- &#39;Narrative driven puzzle-horror.&#39;,
- &#39;Survival existential game&#39;,
- &#34;Something spooky is going on in your new apartment, thankfully you&#39;ve got the internet to help.&#34;,
- &#34;You&#39;re Stephanie, a little car who wants to go home in the night&#34;,
- &#39;2D action platformer set in a bizarre world.&#39;,
- &#39;A nostalgic VN where you create your own character and grow from childhood to adulthood.&#39;,
- &#39;A small horror around the docks&#39;,
- &#39;Atmospheric story rich urban legend horror&#39;,
- &#39;pugs...in space!&#39;,
- &#39;An unnerving dream&#39;,
- &#39;2D platformer whit cool Graphics and Hard Gameplay.&#39;,
+<pre>[&#39;No Players Online inspired project&#39;,
+ &#39;A first-person psychological horror game inspired by P.T.&#39;,
+ &#39;&#34;The Theater&#34; creepypasta inspired horror game.&#39;,
+ &#39;A short narrative horror game about depression.&#39;,
  &#39;N/A&#39;,
  &#39;N/A&#39;,
- &#39;A First Person Terror game&#39;,
- &#39;A Gay Adult Visual Novel&#39;,
- &#39;Soulash is a fantasy roguelike where you play as a forgotten god set on destroying the world.&#39;,
- &#39;Megaman Battle Network inspired Roguelike&#39;,
+ &#34;It&#39;s night and you forgot to buy a gift for your son!&#34;,
+ &#39;Metroidvania style 2D action platformer&#39;,
+ &#39;After a party in an abandoned house, something strange happens, you will have to try to get out.&#39;,
+ &#39;Experience Horror, Live.&#39;,
+ &#39;A first person zombie shooter.&#39;,
+ &#39;Psychological-Horror Game. See what tomorrow holds.&#39;,
+ &#39;A slender inspired horror game based off Captain Crunch.&#39;,
  &#39;N/A&#39;,
- &#34;Fighting against fortune would be a lot easier if you weren&#39;t a walking dice.&#34;]</pre>
+ &#39;A philosophical thriller. The choice of path depends on you. A mystery to solve, look everywhere for the answers.&#39;,
+ &#34;You&#39;re a detective, and a frog, and it&#39;s time to solve a mystery. Also there&#39;s a wizard.&#34;,
+ &#34;An invitation from a stranger... There&#39;s something evil in this house... Will you survive?&#34;,
+ &#34;You star in tonight&#39;s episode of... The Midnight Zone&#34;,
+ &#39;N/A&#39;,
+ &#39;Framing Dawes, where inanimate objects spring to life and rabbits rise from the dead.&#39;,
+ &#39;Escape a mannequin storage facility.&#39;,
+ &#39;A third person shooter with tripods and monsters!&#39;,
+ &#39;First person Horror game about mental health problems&#39;,
+ &#39;You have to escape the mansion, but be careful with what lurks in the dark.&#39;,
+ &#39;Remote Life is a 2D Side scrolling space shooter (shmup) for PC.&#39;,
+ &#39;Your actions have consequences in this action RPG.&#39;,
+ &#39;GAME JAM PROJECT: Dungeon crawler with turn-based combat.&#39;,
+ &#39;an lgbt experiance for gay western jam&#39;,
+ &#39;An interactive story about anxiety. You play *as* the anxiety&#39;,
+ &#39;A text-based game where you navigate the tricky headspace of a teenager who is going to see a movie with his friend.&#39;]</pre>
 </div>
 
 </div>
@@ -13444,15 +13427,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">game_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">game_cells_data</span><span class="p">]</span>
-<span class="c1"># game_taglines = [tagline.find(&#39;div&#39;, {&#39;class&#39;:&#39;game_text&#39;}) for tagline in all_game_data]</span>
 <span class="n">game_urls</span> <span class="o">=</span> <span class="p">[</span><span class="n">url</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">game_cells_data</span><span class="p">]</span>
 <span class="n">game_authors</span> <span class="o">=</span> <span class="p">[</span><span class="n">author</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;game_author&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">author</span> <span class="ow">in</span> <span class="n">game_cells_data</span><span class="p">]</span>
 <span class="n">game_genres</span> <span class="o">=</span> <span class="p">[</span><span class="n">genre</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;game_genre&#39;</span><span class="p">})</span> <span class="k">for</span> <span class="n">genre</span> <span class="ow">in</span> <span class="n">game_cells_data</span><span class="p">]</span>
-<span class="c1">#game_platforms = [platform.find(&#39;span&#39;).attrs[&#39;title&#39;] for platform in all_game_data]</span>
 </pre></div>
 
     </div>
@@ -13462,7 +13443,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">itch_game_data</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">game_names</span><span class="p">,</span> <span class="s1">&#39;tagline&#39;</span><span class="p">:</span><span class="n">game_taglines</span><span class="p">,</span> <span class="s1">&#39;author&#39;</span><span class="p">:</span><span class="n">game_authors</span><span class="p">,</span> <span class="s1">&#39;genre&#39;</span><span class="p">:</span><span class="n">game_genres</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">:</span><span class="n">game_urls</span><span class="p">})</span>
@@ -13476,7 +13457,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">itch_games_data</span>
@@ -13492,7 +13473,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[38]:</div>
+    <div class="prompt output_prompt">Out[15]:</div>
 
 
 
@@ -13525,243 +13506,243 @@ div#notebook {
   <tbody>
     <tr>
       <th>0</th>
-      <td>Sinistria</td>
-      <td>A psychological horror game</td>
-      <td>ClawsDev</td>
-      <td>Survival</td>
-      <td>https://clawsdev.itch.io/sinistria</td>
+      <td>Connection Haunted</td>
+      <td>No Players Online inspired project</td>
+      <td>MrCiastku</td>
+      <td>None</td>
+      <td>https://mrciastku.itch.io/connection-haunted</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Mr. Hopp's Playhouse</td>
-      <td>Every kid has that one toy that scares them. I...</td>
-      <td>Moonbit Studios</td>
-      <td>Survival</td>
-      <td>https://moonbit.itch.io/mrhoppsplayhouse</td>
+      <td>Avarice</td>
+      <td>A first-person psychological horror game inspi...</td>
+      <td>DarkMode</td>
+      <td>&lt;div class="game_genre"&gt;Adventure&lt;/div&gt;</td>
+      <td>https://teamdarkmode.itch.io/avarice</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>I'm Home Demo</td>
-      <td>A short indie horror game!</td>
-      <td>M23BobGames</td>
-      <td>Survival</td>
-      <td>https://m23bobgames.itch.io/im-home</td>
+      <td>Theater Unrest</td>
+      <td>"The Theater" creepypasta inspired horror game.</td>
+      <td>Vidas Games</td>
+      <td>None</td>
+      <td>https://vidas-salavejus.itch.io/theater-unrest</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Tanuki Sunset</td>
-      <td>Raccoons riding longboards on this retro theme...</td>
-      <td>Squid Squad</td>
-      <td>Racing</td>
-      <td>https://squidsquadgames.itch.io/tanuki-sunset</td>
+      <td>Insomnia Awaken</td>
+      <td>A short narrative horror game about depression.</td>
+      <td>Piotr Rycabel</td>
+      <td>&lt;div class="game_genre"&gt;Adventure&lt;/div&gt;</td>
+      <td>https://majkel99.itch.io/iawaken</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Otherworld</td>
-      <td>Escape a haunted hospital using otherworldly p...</td>
-      <td>VoicesFromTheDark</td>
-      <td>Adventure</td>
-      <td>https://voicesfromthedark.itch.io/otherworld</td>
+      <td>Mothman</td>
+      <td>N/A</td>
+      <td>INKIVI</td>
+      <td>&lt;div class="game_genre"&gt;Survival&lt;/div&gt;</td>
+      <td>https://inkivigames.itch.io/mothman</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Gunman and the Witch</td>
-      <td>City Builder meets Top-Down Shooter, settled i...</td>
-      <td>Phun</td>
-      <td>Strategy</td>
-      <td>https://phanphantz.itch.io/gatw</td>
+      <td>Alleyway: a PSX style horror game</td>
+      <td>N/A</td>
+      <td>GloryMeat</td>
+      <td>None</td>
+      <td>https://glorymeat.itch.io/allyway</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>Disorientation (New!)</td>
-      <td>A free short horror game</td>
-      <td>TheJacob</td>
-      <td>N/A</td>
-      <td>https://thejacob.itch.io/disorientation</td>
+      <td>Sweet Pensiveness Christmas</td>
+      <td>It's night and you forgot to buy a gift for yo...</td>
+      <td>Dema studios</td>
+      <td>&lt;div class="game_genre"&gt;Adventure&lt;/div&gt;</td>
+      <td>https://dema-studios.itch.io/sweet-pensiveness...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>Mindustry</td>
-      <td>A sandbox tower defense game</td>
-      <td>Anuke</td>
-      <td>Strategy</td>
-      <td>https://anuke.itch.io/mindustry</td>
+      <td>8Doors (Demo)</td>
+      <td>Metroidvania style 2D action platformer</td>
+      <td>RootlessStudio</td>
+      <td>&lt;div class="game_genre"&gt;Platformer&lt;/div&gt;</td>
+      <td>https://rootlessstudio.itch.io/8doors</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>Dementophobia: Prologue</td>
-      <td>A short horror comedy prologue for Dementophobia</td>
-      <td>A French-Canadian Studios</td>
-      <td>N/A</td>
-      <td>https://frenchcanadianstudios.itch.io/dementop...</td>
+      <td>Bloodshot Eyes</td>
+      <td>After a party in an abandoned house, something...</td>
+      <td>zellegames</td>
+      <td>&lt;div class="game_genre"&gt;Survival&lt;/div&gt;</td>
+      <td>https://zellegames.itch.io/bloodshot-eyes</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>Insulation</td>
-      <td>Something sinister happens in Saint Bernard.</td>
-      <td>Josthin Contreras</td>
-      <td>Adventure</td>
-      <td>https://jcontry.itch.io/insulation</td>
+      <td>ENTITY</td>
+      <td>Experience Horror, Live.</td>
+      <td>Scythe Dev Team</td>
+      <td>&lt;div class="game_genre"&gt;Adventure&lt;/div&gt;</td>
+      <td>https://scythedevteam.itch.io/entity</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>Repeat (Visual Novel)</td>
-      <td>Gay furry visual novel with a supernatural twist</td>
-      <td>shirokoi</td>
-      <td>Visual Novel</td>
-      <td>https://shirokoi.itch.io/repeat-visual-novel</td>
+      <td>Alive And Deceased</td>
+      <td>A first person zombie shooter.</td>
+      <td>Nocturna1</td>
+      <td>&lt;div class="game_genre"&gt;Shooter&lt;/div&gt;</td>
+      <td>https://nocturna1.itch.io/alive-and-deceased</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>Ancra</td>
-      <td>Narrative driven puzzle-horror.</td>
-      <td>l2tdak</td>
-      <td>N/A</td>
-      <td>https://l2tdak.itch.io/ancra</td>
+      <td>Ghost Of Tomorrow</td>
+      <td>Psychological-Horror Game. See what tomorrow h...</td>
+      <td>EddLioni</td>
+      <td>None</td>
+      <td>https://eddlioni.itch.io/ghost-of-tomorrow</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>What's Behind The Mirror</td>
-      <td>Survival existential game</td>
-      <td>El fideo rubio</td>
-      <td>Survival</td>
-      <td>https://el-fideo-rubio.itch.io/whats-behind-th...</td>
+      <td>Crunchy</td>
+      <td>A slender inspired horror game based off Capta...</td>
+      <td>C&amp;D Cardboard Games</td>
+      <td>&lt;div class="game_genre"&gt;Adventure&lt;/div&gt;</td>
+      <td>https://cd-cardboard-games.itch.io/crunchy</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>I'm Still Here</td>
-      <td>Something spooky is going on in your new apart...</td>
-      <td>Cozy Game Pals</td>
-      <td>Simulation</td>
-      <td>https://cozygamepals.itch.io/im-still-here</td>
+      <td>Faerie Afterlight</td>
+      <td>N/A</td>
+      <td>claygamestudio</td>
+      <td>&lt;div class="game_genre"&gt;Platformer&lt;/div&gt;</td>
+      <td>https://claygamestudio.itch.io/faerie-afterlight</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>Detour</td>
-      <td>You're Stephanie, a little car who wants to go...</td>
-      <td>Thob</td>
-      <td>Simulation</td>
-      <td>https://thob.itch.io/detour</td>
+      <td>Seul.(Alone): The entrÃ©e</td>
+      <td>A philosophical thriller. The choice of path d...</td>
+      <td>Paranormal Games</td>
+      <td>&lt;div class="game_genre"&gt;Visual Novel&lt;/div&gt;</td>
+      <td>https://paranormalgames.itch.io/seulalone</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>Primal Light - Demo</td>
-      <td>2D action platformer set in a bizarre world.</td>
-      <td>Fat Gem</td>
-      <td>Platformer</td>
-      <td>https://fat-gem.itch.io/primal-light</td>
+      <td>Frog Detective 2: The Case of the Invisible Wi...</td>
+      <td>You're a detective, and a frog, and it's time ...</td>
+      <td>Grace Bruxner</td>
+      <td>&lt;div class="game_genre"&gt;Adventure&lt;/div&gt;</td>
+      <td>https://fisho.itch.io/frog-detective-2</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>âOur Life: Beginnings &amp; Always</td>
-      <td>A nostalgic VN where you create your own chara...</td>
-      <td>GBPatch</td>
-      <td>Visual Novel</td>
-      <td>https://gbpatch.itch.io/our-life</td>
+      <td>The Alchemist's House</td>
+      <td>An invitation from a stranger... There's somet...</td>
+      <td>Angry Bunny</td>
+      <td>&lt;div class="game_genre"&gt;Interactive Fiction&lt;/div&gt;</td>
+      <td>https://pokelover812.itch.io/thealchemist</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>Elliot Docks</td>
-      <td>A small horror around the docks</td>
-      <td>ClickBuildGames</td>
-      <td>Puzzle</td>
-      <td>https://clickbuildgames.itch.io/elliot-docks</td>
+      <td>Start Survey?</td>
+      <td>You star in tonight's episode of... The Midnig...</td>
+      <td>PixelDough</td>
+      <td>None</td>
+      <td>https://pixeldough.itch.io/start-survey</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>Perdita</td>
-      <td>Atmospheric story rich urban legend horror</td>
-      <td>Azaxor</td>
+      <td>Siren Head 1995</td>
       <td>N/A</td>
-      <td>https://azaxor.itch.io/perdita</td>
+      <td>thuleanpanteon</td>
+      <td>&lt;div class="game_genre"&gt;Adventure&lt;/div&gt;</td>
+      <td>https://thuleanpanteon.itch.io/sirenhead95</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>spacepugs</td>
-      <td>pugs...in space!</td>
-      <td>spacepugs</td>
-      <td>Action</td>
-      <td>https://spacepugs.itch.io/spacepugs</td>
+      <td>Framing Dawes Demo</td>
+      <td>Framing Dawes, where inanimate objects spring ...</td>
+      <td>JinxItGames</td>
+      <td>&lt;div class="game_genre"&gt;Adventure&lt;/div&gt;</td>
+      <td>https://jinxitgames.itch.io/framing-dawes-demo</td>
     </tr>
     <tr>
       <th>20</th>
-      <td>Cardiac</td>
-      <td>An unnerving dream</td>
-      <td>katanalevy</td>
-      <td>N/A</td>
-      <td>https://katanalevy.itch.io/cardiac</td>
+      <td>Midnight Shift</td>
+      <td>Escape a mannequin storage facility.</td>
+      <td>Phantom</td>
+      <td>&lt;div class="game_genre"&gt;Adventure&lt;/div&gt;</td>
+      <td>https://pddev.itch.io/midnight-shift</td>
     </tr>
     <tr>
       <th>21</th>
-      <td>BrainMarmelade</td>
-      <td>2D platformer whit cool Graphics and Hard Game...</td>
-      <td>Am.Hyde</td>
-      <td>Adventure</td>
-      <td>https://amhyde.itch.io/brainmarmelade</td>
+      <td>They Are Coming</td>
+      <td>A third person shooter with tripods and monsters!</td>
+      <td>TeamRevived</td>
+      <td>&lt;div class="game_genre"&gt;Shooter&lt;/div&gt;</td>
+      <td>https://teamrevived.itch.io/they-are-coming</td>
     </tr>
     <tr>
       <th>22</th>
-      <td>Disconnected</td>
-      <td>N/A</td>
-      <td>chrstphfr</td>
-      <td>Adventure</td>
-      <td>https://chrstphfr.itch.io/disconnected</td>
+      <td>Symptoms</td>
+      <td>First person Horror game about mental health p...</td>
+      <td>RonnelSalgado</td>
+      <td>&lt;div class="game_genre"&gt;Adventure&lt;/div&gt;</td>
+      <td>https://ronnelsalgado.itch.io/symptoms</td>
     </tr>
     <tr>
       <th>23</th>
-      <td>Spin!</td>
-      <td>N/A</td>
-      <td>Alienplay</td>
-      <td>Platformer</td>
-      <td>https://alienplay.itch.io/spin</td>
+      <td>Escape the Ayuwoki</td>
+      <td>You have to escape the mansion, but be careful...</td>
+      <td>Deadlycrow Games</td>
+      <td>&lt;div class="game_genre"&gt;Survival&lt;/div&gt;</td>
+      <td>https://deadlycrowgames.itch.io/escape-the-ayu...</td>
     </tr>
     <tr>
       <th>24</th>
-      <td>Black Cat: Chapter 1: Where is the cat?</td>
-      <td>A First Person Terror game</td>
-      <td>MateusBomfim</td>
-      <td>N/A</td>
-      <td>https://mateusbomfim.itch.io/black-cat-chapter-1</td>
+      <td>REMOTE LIFE  -  Demo 1.5</td>
+      <td>Remote Life is a 2D Side scrolling space shoot...</td>
+      <td>nextgamelevel</td>
+      <td>&lt;div class="game_genre"&gt;Action&lt;/div&gt;</td>
+      <td>https://nextgamelevel.itch.io/remote-life</td>
     </tr>
     <tr>
       <th>25</th>
-      <td>All Men Are Pigs</td>
-      <td>A Gay Adult Visual Novel</td>
-      <td>KaimakiGames</td>
-      <td>Visual Novel</td>
-      <td>https://kaimakigames.itch.io/all-men-are-pigs</td>
+      <td>Biomass</td>
+      <td>Your actions have consequences in this action ...</td>
+      <td>finalscenedev</td>
+      <td>&lt;div class="game_genre"&gt;Action&lt;/div&gt;</td>
+      <td>https://finalscenedev.itch.io/biomass</td>
     </tr>
     <tr>
       <th>26</th>
-      <td>Soulash</td>
-      <td>Soulash is a fantasy roguelike where you play ...</td>
-      <td>Artur Smiarowski</td>
-      <td>Role Playing</td>
-      <td>https://wizardsofthecode.itch.io/soulash</td>
+      <td>H.E.R.O.</td>
+      <td>GAME JAM PROJECT: Dungeon crawler with turn-ba...</td>
+      <td>sadherogames</td>
+      <td>&lt;div class="game_genre"&gt;Strategy&lt;/div&gt;</td>
+      <td>https://sadherogames.itch.io/hero</td>
     </tr>
     <tr>
       <th>27</th>
-      <td>One Step From Eden</td>
-      <td>Megaman Battle Network inspired Roguelike</td>
-      <td>EdenDev</td>
-      <td>Action</td>
-      <td>https://tmkang.itch.io/osfe</td>
+      <td>:Cider.</td>
+      <td>an lgbt experiance for gay western jam</td>
+      <td>Knight-Devlin</td>
+      <td>&lt;div class="game_genre"&gt;Visual Novel&lt;/div&gt;</td>
+      <td>https://violet-neon.itch.io/the-cider-report</td>
     </tr>
     <tr>
       <th>28</th>
-      <td>LOW-FI</td>
-      <td>N/A</td>
-      <td>Anticleric</td>
-      <td>N/A</td>
-      <td>https://anticleric.itch.io/low-fi</td>
+      <td>Adventures With Anxiety!</td>
+      <td>An interactive story about anxiety. You play *...</td>
+      <td>Nicky Case!</td>
+      <td>&lt;div class="game_genre"&gt;Visual Novel&lt;/div&gt;</td>
+      <td>https://ncase.itch.io/anxiety</td>
     </tr>
     <tr>
       <th>29</th>
-      <td>Dicey Dungeons</td>
-      <td>Fighting against fortune would be a lot easier...</td>
-      <td>Terry Cavanagh</td>
-      <td>N/A</td>
-      <td>https://terrycavanagh.itch.io/dicey-dungeons</td>
+      <td>is it that deep, bro?</td>
+      <td>A text-based game where you navigate the trick...</td>
+      <td>moawling</td>
+      <td>&lt;div class="game_genre"&gt;Visual Novel&lt;/div&gt;</td>
+      <td>https://moawling.itch.io/is-it-that-deep-bro</td>
     </tr>
   </tbody>
 </table>
@@ -13776,7 +13757,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">itch_games_data</span><span class="o">.</span><span class="n">genre</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
@@ -13792,23 +13773,20 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[39]:</div>
+    <div class="prompt output_prompt">Out[16]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>N/A             8
-Survival        4
-Adventure       4
-Visual Novel    3
-Action          2
-Simulation      2
-Platformer      2
-Strategy        2
-Puzzle          1
-Racing          1
-Role Playing    1
+<pre>&lt;div class=&#34;game_genre&#34;&gt;Adventure&lt;/div&gt;              10
+&lt;div class=&#34;game_genre&#34;&gt;Visual Novel&lt;/div&gt;            4
+&lt;div class=&#34;game_genre&#34;&gt;Survival&lt;/div&gt;                3
+&lt;div class=&#34;game_genre&#34;&gt;Action&lt;/div&gt;                  2
+&lt;div class=&#34;game_genre&#34;&gt;Shooter&lt;/div&gt;                 2
+&lt;div class=&#34;game_genre&#34;&gt;Platformer&lt;/div&gt;              2
+&lt;div class=&#34;game_genre&#34;&gt;Strategy&lt;/div&gt;                1
+&lt;div class=&#34;game_genre&#34;&gt;Interactive Fiction&lt;/div&gt;     1
 Name: genre, dtype: int64</pre>
 </div>
 
@@ -13820,7 +13798,7 @@ Name: genre, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">itch_games_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;itch_game_data&#39;</span><span class="p">)</span>
@@ -13836,7 +13814,7 @@ Name: genre, dtype: int64</pre>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="n">Decorators</span><span class="o">.</span><span class="n">ipynb</span> <span class="o">--</span><span class="n">to</span> <span class="n">html</span>
 </pre></div>
 
     </div>
@@ -13852,5 +13830,3 @@ Name: genre, dtype: int64</pre>
 
 
 </html>
-
-{%endblock%}
