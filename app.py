@@ -42,14 +42,14 @@ def result():
         sentiment = TextBlob(article, classifier = c).sentiment
 
         classification = c.classify(article)
-        prediction = predictor.predict([sentiment])
+        sentiment = predictor.predict([sentiment])
 
         if (classification == 'neg'):
             result = 'negative'
         else:
             result = 'positive'
 
-        return render_template('blog.html', n=name, r=result, p=prediction)
+        return render_template('blog.html', n=name, r=result, s = (sentiment[0]*10)/10)
 
 #put site content here
 
