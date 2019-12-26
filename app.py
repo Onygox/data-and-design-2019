@@ -37,7 +37,7 @@ def result():
 
         inputs = flask.request.form
 
-        name = inputs['name']
+        # name = inputs['name']
         article = inputs['article']
         sentiment = TextBlob(article, classifier = c).sentiment
 
@@ -49,7 +49,11 @@ def result():
         else:
             result = 'positive'
 
-        return render_template('blog.html', n=name, r=result, s = (sentiment[0]*10)/10)
+        # return render_template('blog.html', r=result, s = (sentiment[0]*10)/10)
+    with open("build/classify.html", 'r') as viz_file:
+        return viz_file.read()
+
+    # return render_template('blog.html', r=result, s = sentiment[0])
 
 #put site content here
 
